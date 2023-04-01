@@ -13,4 +13,11 @@ class SelectionSort {
         this.array = new int[this.size];
     }
 
+    void input() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter " + this.size + " integers = ");
+        for(int i = 0; i < this.size; ++i)
+            this.array[i] = sc.nextInt();
+    }
+
 }
