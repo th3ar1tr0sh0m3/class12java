@@ -1,63 +1,88 @@
-/**
- * Selection Sort Program
- * Both Descending and Ascending
- * Follows the Class pattern of questions asked in ISC
- * (c) Aritro Shome 2023 - 2024
- */
+package arrays;
+
 import java.util.Scanner;
+
+/**
+ * Selection Sort
+ *
+ * @author Aritro Shome
+ * @apiNote 0.0.1
+ */
 class SelectionSort {
     int[] array;
-    int size;
-    SelectionSort(int n) {
-        this.size = n;
-        this.array = new int[this.size];
-    }
-    //core method pay attention
-    void sortAscending() {
-        for(int i = 0; i < this.size; ++i) {
-            int min = Integer.MAX_VALUE, idx = 0;
-            //the goal is to search the entire array and replace the n-th position with the n-th smallest
-            //element
-            //the j loop does the searching part, the i loop maintains n and the swapping procedure
-            for(int j = i + 1; j < this.size; ++j) {
-                if(this.array[j] < min){
-                    idx = j;
-                    min = this.array[j];
-                }
-            }
-            //the swapping
-            int temp = this.array[i];
-            this.array[i] = this.array[idx];
-            this.array[idx] = temp;
-        }
+    int len;
+
+    SelectionSort(int len) {
+        this.len = len;
+        this.array = new int[this.len];
     }
 
-    //core method pay attention
-    void sortDescending() {
-        for(int i = 0; i < this.size; ++i) {
-            int max = Integer.MIN_VALUE, idx = 0;
-            //the goal is to search the entire array and replace the n-th position with the n-th largest
-            //element
-            //the j loop does the searching part, the i loop maintains n and the swapping procedure
-            for(int j = i + 1; j < this.size; ++j) {
-                if(this.array[j] > max){
-                    idx = j;
-                    max = this.array[j];
-                }
-            }
-            //the swapping
-            int temp = this.array[i];
-            this.array[i] = this.array[idx];
-            this.array[idx] = temp;
-        }
+    public static void main(String[] args) {
+        SelectionSort obj = new SelectionSort(10);
+        //take input of the elements of the array
+        obj.input();
+        //sort the array in descending order
+        obj.sortDescending();
+        //display sorted array
+        obj.display();
+        //sort the array in ascending order
+        obj.sortAscending();
+        //display sorted array
+        obj.display();
     }
 
-
+    /**
+     * takes input of the elements of the array from console.
+     */
     void input() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter " + this.size + " integers = ");
-        for(int i = 0; i < this.size; ++i)
+        System.out.println("Enter " + this.len + " integers = ");
+        for (int i = 0; i < this.len; ++i)
             this.array[i] = sc.nextInt();
+        sc.close();
+    }
+    //same logic as ascending but reversed inequalities
+
+    /**
+     * sorts the array ascending order
+     */
+    void sortAscending() {
+        //the outer loop chooses the position of element to be 'cleaned'
+        for (int i = 0; i < this.len - 1; ++i) {
+            //fix reference point at current i
+            int min = i;
+            for (int j = i + 1; j < this.len; ++j) {
+                //if you find a 'cleaner' value save its index
+                if (this.array[j] < this.array[min])
+                    min = j;
+            }
+            //swap reference with the 'cleanest'
+            int temp = this.array[i];
+            this.array[i] = this.array[min];
+            this.array[min] = temp;
+        }
     }
 
+    /**
+     * sorts the array descending order
+     */
+    void sortDescending() {
+        for (int i = 0; i < this.len - 1; ++i) {
+            int max = i;
+            for (int j = i + 1; j < this.len; ++j) {
+                if (this.array[j] > this.array[max])
+                    max = j;
+            }
+            int temp = this.array[i];
+            this.array[i] = this.array[max];
+            this.array[max] = temp;
+        }
+    }
+
+    public void display() {
+        System.out.println("The array = ");
+        for (int i : this.array)
+            System.out.print(i + " ");
+        System.out.println();
+    }
 }
