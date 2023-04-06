@@ -17,15 +17,6 @@ public class BubbleSort {
         this.array = new int[this.len];
     }
 
-    public static void main(String[] args) {
-        BubbleSort obj = new BubbleSort(10);
-        obj.input();
-        obj.sortAscending();
-        obj.display();
-        obj.sortDescending();
-        obj.display();
-    }
-
     void input() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter " + this.len + " integers = ");
@@ -67,5 +58,14 @@ public class BubbleSort {
                 }
             }
         }
+    }
+
+    public static void main(String[] args) {
+        BubbleSort obj = new BubbleSort(10);
+        obj.input();
+        obj.sortAscending();
+        obj.display();
+        obj.sortDescending();
+        obj.display();
     }
 }
